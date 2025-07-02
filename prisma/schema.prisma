@@ -1,0 +1,94 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Influencer {
+    id             String   @id
+    name           String
+    gender         Gender
+    age            Int
+    followers      Int
+    engagementRate Float
+    avgLikes       Int
+    avgComments    Int
+    location       String
+    createdAt      DateTime @default(now())
+    updatedAt      DateTime @updatedAt
+
+    platforms InfluencerPlatform[]
+    topics    InfluencerTopic[]
+    favorites Favorites[]
+}
+
+model Platform {
+    id        String   @id @default(cuid())
+    name      String   @unique
+    createdAt DateTime @default(now())
+
+    influencers InfluencerPlatform[]
+}
+
+model Topic {
+    id        String   @id @default(cuid())
+    name      String   @unique
+    createdAt DateTime @default(now())
+
+    influencers InfluencerTopic[]
+}
+
+model InfluencerPlatform {
+    influencerId String
+    platformId   String
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
+
+    influencer Influencer @relation(fields: [influencerId], references: [id], onDelete: Cascade)
+    platform   Platform   @relation(fields: [platformId], references: [id], onDelete: Cascade)
+
+    @@id([influencerId, platformId])
+}
+
+model InfluencerTopic {
+    influencerId String
+    topicId      String
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
+
+    influencer Influencer @relation(fields: [influencerId], references: [id], onDelete: Cascade)
+    topic      Topic      @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+    @@id([influencerId, topicId])
+}
+
+model User {
+    id        String      @id @default(cuid())
+    email     String      @unique
+    name      String
+    password  String
+    favorites Favorites[]
+    createdAt DateTime    @default(now())
+    updatedAt DateTime    @updatedAt
+}
+
+model Favorites {
+    id           String   @id @default(cuid())
+    userId       String
+    influencerId String
+    createdAt    DateTime @default(now())
+
+    user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+    influencer Influencer @relation(fields: [influencerId], references: [id], onDelete: Cascade)
+
+    @@unique([userId, influencerId])
+}
+
+enum Gender {
+    male
+    female
+    non_binary
+}
