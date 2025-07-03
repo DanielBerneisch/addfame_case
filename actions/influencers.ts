@@ -1,6 +1,7 @@
 "use server";
 
 import { prisma } from "@/prisma/client";
+import { InfluencerWithRelations } from "@/types";
 import { Gender } from "@prisma/client";
 
 interface FilterOptions {
@@ -17,7 +18,10 @@ interface FilterOptions {
   followersMax?: number;
 }
 
-export async function getInfluencers(filters: FilterOptions = {}) {
+export async function getInfluencers(filters: FilterOptions = {}): Promise<{
+  influencers: InfluencerWithRelations[];
+  error?: string;
+}> {
   try {
     const {
       query,
@@ -150,7 +154,7 @@ export async function getInfluencers(filters: FilterOptions = {}) {
     });
 
     return {
-      influencers,
+      influencers: influencers as InfluencerWithRelations[],
     };
   } catch (error) {
     console.error("Error fetching influencers:", error);

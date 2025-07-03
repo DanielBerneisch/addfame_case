@@ -160,7 +160,7 @@ export default function Navbar({ session }: NavbarProps) {
               </>
             ) : (
               <Link
-                href="/login"
+                href="/signin"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block w-full text-center bg-blue-600 text-white px-3 py-2 rounded-md text-base font-medium hover:bg-blue-700"
               >
