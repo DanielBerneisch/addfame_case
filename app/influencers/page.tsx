@@ -5,8 +5,8 @@ import { redirect } from "next/navigation";
 import { getInfluencers } from "@/actions/influencers";
 import { getPlatforms } from "@/actions/platforms";
 import { getTopics } from "@/actions/topics";
-import InfluencerFilter from "@/components/Influencer/InfluencerFilter";
-import InfluencerSearch from "@/components/Influencer/InfluencerSearch";
+import InfluencerFilter from "@/components/Filter/InfluencerFilter";
+import InfluencerSearch from "@/components/Filter/InfluencerSearch";
 import { getFavoriteIds } from "@/actions/favorites";
 
 interface PageProps {

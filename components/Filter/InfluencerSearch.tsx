@@ -14,12 +14,12 @@ export default function InfluencerSearch() {
     setSearchTerm(query);
   }, [searchParams]);
 
-  const handleSearch = (e: React.FormEvent) => {
+  function handleSearch(e: React.FormEvent) {
     e.preventDefault();
     updateSearchParam(searchTerm);
-  };
+  }
 
-  const updateSearchParam = (query: string) => {
+  function updateSearchParam(query: string) {
     const params = new URLSearchParams(searchParams);
 
     if (query.trim()) {
@@ -29,12 +29,12 @@ export default function InfluencerSearch() {
     }
 
     router.push(`?${params.toString()}`);
-  };
+  }
 
-  const clearSearch = () => {
+  function clearSearch() {
     setSearchTerm("");
     updateSearchParam("");
-  };
+  }
 
   return (
     <div className="mb-6">

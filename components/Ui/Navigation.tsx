@@ -21,9 +21,9 @@ export default function Navbar({ session }: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
 
-  const handleLogout = () => {
+  function handleLogout() {
     signOut({ redirect: true, callbackUrl: "/signin" });
-  };
+  }
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
@@ -68,7 +68,7 @@ export default function Navbar({ session }: NavbarProps) {
                     onMouseLeave={() => setIsProfileDropdownOpen(false)}
                   >
                     <Link
-                      href="/profile"
+                      href="/favorites"
                       className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                     >
                       <FaCog className="mr-2" /> Profile Information
@@ -135,7 +135,7 @@ export default function Navbar({ session }: NavbarProps) {
             {session ? (
               <>
                 <Link
-                  href="/profile"
+                  href="/favorites"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100"
                 >

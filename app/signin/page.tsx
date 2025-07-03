@@ -1,9 +1,18 @@
-import SignInForm from "@/components/SigninForm";
+import SignInForm from "@/components/Forms/SigninForm";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
 
-export default function SignInPage() {
+export default async function SignInPage() {
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    redirect("/home");
+  }
+
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <section className="py-12 lg:py-40">
       <SignInForm />
-    </div>
+    </section>
   );
 }

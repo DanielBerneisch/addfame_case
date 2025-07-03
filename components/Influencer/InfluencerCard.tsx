@@ -9,13 +9,11 @@ import FavoriteButton from "../Favorites/FavoriteButton";
 
 interface InfluencerCardProps {
   influencer: InfluencerWithRelations;
-  index: number;
   isFavorited?: boolean;
 }
 
 export default function InfluencerCard({
   influencer,
-  index,
   isFavorited = false,
 }: InfluencerCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,10 +36,10 @@ export default function InfluencerCard({
     <>
       <motion.div
         className="relative bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl flex flex-col items-center p-6 text-center"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8 }}
         onClick={openModal}
       >
         <Image
