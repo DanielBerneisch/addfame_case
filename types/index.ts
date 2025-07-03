@@ -14,3 +14,22 @@ export type InfluencerWithRelations = Prisma.InfluencerGetPayload<{
     };
   };
 }>;
+
+export type FavoritesWithInfluencer = Prisma.FavoritesGetPayload<{
+  include: {
+    influencer: {
+      include: {
+        platforms: {
+          include: {
+            platform: true;
+          };
+        };
+        topics: {
+          include: {
+            topic: true;
+          };
+        };
+      };
+    };
+  };
+}>;

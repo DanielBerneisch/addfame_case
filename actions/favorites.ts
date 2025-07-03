@@ -4,6 +4,7 @@ import { prisma } from "@/prisma/client";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth/authOptions";
 import { revalidatePath } from "next/cache";
+import { FavoritesWithInfluencer, InfluencerWithRelations } from "@/types";
 
 export async function addToFavorites(influencerId: string) {
   try {
@@ -86,7 +87,10 @@ export async function removeFromFavorites(influencerId: string) {
   }
 }
 
-export async function getFavorites() {
+export async function getFavorites(): Promise<{
+  favorites: InfluencerWithRelations[];
+  error?: string;
+}> {
   try {
     const session = await getServerSession(authOptions);
 
@@ -102,7 +106,7 @@ export async function getFavorites() {
       return { favorites: [] };
     }
 
-    const favorites = await prisma.favorites.findMany({
+    const favorites = (await prisma.favorites.findMany({
       where: { userId: user.id },
       include: {
         influencer: {
@@ -123,7 +127,7 @@ export async function getFavorites() {
       orderBy: {
         createdAt: "desc",
       },
-    });
+    })) as FavoritesWithInfluencer[];
 
     return { favorites: favorites.map((favorite) => favorite.influencer) };
   } catch (error) {
