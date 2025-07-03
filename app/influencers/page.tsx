@@ -10,7 +10,7 @@ import InfluencerSearch from "@/components/Filter/InfluencerSearch";
 import { getFavoriteIds } from "@/actions/favorites";
 
 interface PageProps {
-  searchParams: {
+  searchParams: Promise<{
     query?: string;
     platforms?: string;
     topics?: string;
@@ -22,7 +22,7 @@ interface PageProps {
     location?: string;
     followersMin?: string;
     followersMax?: string;
-  };
+  }>;
 }
 
 export default async function Influencers({ searchParams }: PageProps) {
