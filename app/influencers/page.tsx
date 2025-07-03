@@ -32,6 +32,8 @@ export default async function Influencers({ searchParams }: PageProps) {
     redirect("/signin");
   }
 
+  const params = await searchParams;
+
   const {
     query,
     platforms,
@@ -44,7 +46,7 @@ export default async function Influencers({ searchParams }: PageProps) {
     location,
     followersMin,
     followersMax,
-  } = await searchParams;
+  } = params;
 
   const platformNames = platforms ? platforms.split(",") : undefined;
   const topicNames = topics ? topics.split(",") : undefined;
