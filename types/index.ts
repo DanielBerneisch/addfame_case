@@ -12,6 +12,5 @@ export type InfluencerWithRelations = Prisma.InfluencerGetPayload<{
         topic: true;
       };
     };
-    favorites: true;
   };
 }>;
