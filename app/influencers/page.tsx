@@ -7,6 +7,7 @@ import { getPlatforms } from "@/actions/platforms";
 import { getTopics } from "@/actions/topics";
 import InfluencerFilter from "@/components/Influencer/InfluencerFilter";
 import InfluencerSearch from "@/components/Influencer/InfluencerSearch";
+import { getFavoriteIds } from "@/actions/favorites";
 
 interface PageProps {
   searchParams: {
@@ -62,15 +63,18 @@ export default async function Influencers({ searchParams }: PageProps) {
     followersMax: followersMax ? parseInt(followersMax) : undefined,
   };
 
-  const [influencersResult, platformsResult, topicsResult] = await Promise.all([
-    getInfluencers(filters),
-    getPlatforms(),
-    getTopics(),
-  ]);
+  const [influencersResult, platformsResult, topicsResult, favoriteResults] =
+    await Promise.all([
+      getInfluencers(filters),
+      getPlatforms(),
+      getTopics(),
+      getFavoriteIds(),
+    ]);
 
   const { influencers } = influencersResult;
   const { platforms: availablePlatforms } = platformsResult;
   const { topics: availableTopics } = topicsResult;
+  const { favoriteIds } = favoriteResults;
 
   return (
     <section className="container mx-auto px-4 py-8">
@@ -98,7 +102,10 @@ export default async function Influencers({ searchParams }: PageProps) {
               Showing {influencers.length} results for &quot;{query}&quot;
             </div>
           )}
-          <InfluencerOverview influencers={influencers} />
+          <InfluencerOverview
+            influencers={influencers}
+            favoriteIds={favoriteIds}
+          />
         </>
       )}
     </section>
