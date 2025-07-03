@@ -35,7 +35,7 @@ export default function RegisterForm() {
     resolver: zodResolver(registerSchema),
   });
 
-  const onSubmit = async (data: RegisterFormData) => {
+  async function onSubmit(data: RegisterFormData) {
     setIsLoading(true);
     setServerError(null);
 
@@ -58,11 +58,11 @@ export default function RegisterForm() {
     }
 
     setIsLoading(false);
-  };
+  }
 
   return (
     <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-6 text-center">Create Account</h2>
+      <h2 className="text-2xl mb-6 text-center">Create Account</h2>
 
       {serverError && (
         <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
@@ -154,7 +154,7 @@ export default function RegisterForm() {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
         >
           {isLoading ? "Creating Account..." : "Create Account"}
         </button>
