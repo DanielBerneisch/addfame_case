@@ -4,7 +4,7 @@ import "./globals.css";
 import SessionProvider from "@/components/SessionProvider";
 import Navbar from "@/components/Ui/Navigation";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+import { authOptions } from "@/auth/authOptions";
 import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({

@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "@/auth/authOptions";
 import { redirect } from "next/navigation";
 import { getFavorites } from "@/actions/favorites";
 import InfluencerOverview from "@/components/Influencer/InfluencerOverview";
