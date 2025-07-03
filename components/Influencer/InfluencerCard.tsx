@@ -5,15 +5,18 @@ import { InfluencerWithRelations } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { FaTimes } from "react-icons/fa";
+import FavoriteButton from "../Favorites/FavoriteButton";
 
 interface InfluencerCardProps {
   influencer: InfluencerWithRelations;
   index: number;
+  isFavorited?: boolean;
 }
 
 export default function InfluencerCard({
   influencer,
   index,
+  isFavorited = false,
 }: InfluencerCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -48,6 +51,17 @@ export default function InfluencerCard({
           width={96}
           height={96}
         />
+
+        <div
+          className="absolute top-2 right-2"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <FavoriteButton
+            influencerId={influencer.id}
+            isFavorited={isFavorited}
+            size="md"
+          />
+        </div>
 
         <div className="w-full">
           <h3 className="text-xl font-semibold text-gray-800 mb-1">
@@ -103,6 +117,14 @@ export default function InfluencerCard({
                   width={96}
                   height={96}
                 />
+
+                <div className="absolute top-4 left-4">
+                  <FavoriteButton
+                    influencerId={influencer.id}
+                    isFavorited={isFavorited}
+                    size="md"
+                  />
+                </div>
 
                 <h3 className="text-3xl font-bold text-gray-900 mb-2">
                   {influencer.name}

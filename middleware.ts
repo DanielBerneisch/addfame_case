@@ -9,5 +9,5 @@ export default withAuth(function middleware() {}, {
 });
 
 export const config = {
-  matcher: ["/influencers/:path*", "/"],
+  matcher: ["/influencers/:path*", "/", "/favorites/:path*"],
 };
